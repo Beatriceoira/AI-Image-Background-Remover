@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MatteForge - AI Background Remover</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>MatteForge</h1>
+      <p>AI Background Remover</p>
+    </header>
+
+    <main class="upload-area" id="uploadArea">
+      <div class="upload-content">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="drop-icon">
+          <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M10 7l5 5M10 11l5-5"/>
+        </svg>
+        <p>Drop image here</p>
+        <p>or</p>
+        <button type="button" class="btn-secondary" id="chooseBtn">Choose Image</button>
+        <input type="file" id="fileInput" accept="image/*" hidden>
+      </div>
+    </main>
+
+    <div class="action-buttons" id="actionButtons" style="display: none;">
+      <button id="processBtn" class="btn-primary">Remove Background</button>
+      <button id="resetBtn" class="btn-secondary">Reset</button>
+    </div>
+
+    <!-- Controls Panel -->
+    <div class="controls-panel" id="controlsPanel" style="display: none;">
+      <h3>Processing Options</h3>
+      <div class="control-group">
+        <label>
+          <input type="checkbox" id="refineEdges"> Refine Edges
+        </label>
+      </div>
+      <div class="control-group">
+        <label>Blur Radius</label>
+        <input type="range" id="blurRadius" min="0" max="10" value="0">
+        <span id="blurValue">0</span>
+      </div>
+      <div class="control-group">
+        <label>Median Filter</label>
+        <input type="range" id="medianFilter" min="0" max="10" value="0">
+        <span id="medianValue">0</span>
+      </div>
+      <div class="control-group">
+        <label>
+          <input type="checkbox" id="holeFill" checked> Fill Holes
+        </label>
+      </div>
+      <div class="control-group">
+        <label>Background</label>
+        <select id="bgMode">
+          <option value="transparent">Transparent</option>
+          <option value="solid">Solid Color</option>
+          <option value="gradient">Gradient</option>
+        </select>
+      </div>
+      <div class="control-group" id="colorPickerGroup" style="display: none;">
+        <label>Color</label>
+        <input type="color" id="bgColor" value="#ffffff">
+      </div>
+    </div>
+
+    <div class="results-area" id="resultsArea" style="display: none;">
+      <h3>Results</h3>
+
+      <!-- Before/After Comparison -->
+      <div class="comparison-viewer">
+        <div class="comparison" id="comparison">
+          <div class="side left">
+            <div class="label">Original</div>
+            <canvas id="originalCanvas"></canvas>
+          </div>
+          <div class="side right">
+            <div class="label">Result</div>
+            <canvas id="resultCanvas"></canvas>
+          </div>
+        </div>
+        <input type="range" id="comparisonSlider" class="comparison-slider" min="0" max="100" value="50">
+      </div>
+
+      <!-- Output Preview -->
+      <div class="output-preview">
+        <div class="output-info">
+          <div>Format: <span id="outputFormat">PNG</span></div>
+          <div>Mode: <span>RGBA</span></div>
+          <div>Dimensions: <span id="outputSize">-</span></div>
+        </div>
+        <canvas id="outputCanvas"></canvas>
+        <div class="download-options">
+          <button id="downloadPng" class="btn-secondary" disabled>Download PNG</button>
+          <button id="downloadJpg" class="btn-secondary" disabled>Download JPEG</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Error Display -->
+    <div class="error-message" id="errorMessage" style="display: none;"></div>
+
+    <!-- Loading Indicator -->
+    <div class="loading" id="loading" style="display: none;">
+      <div class="spinner"></div>
+      <p>Processing your image...</p>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

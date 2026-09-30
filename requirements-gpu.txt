@@ -1,0 +1,11 @@
+# Use the default PyTorch wheel which auto-detects CUDA
+torch
+torchvision
+fastapi
+uvicorn
+pillow
+numpy
+python-multipart
+requests
+tqdm
+httpx

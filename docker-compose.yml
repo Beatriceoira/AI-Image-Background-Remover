@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.cpu
+    ports:
+      - "8000:8000"
+    environment:
+      - DEVICE=auto
+      - MODEL_NAME=u2net
+      - MAX_UPLOAD_SIZE_MB=15
+      - MAX_IMAGE_WIDTH=6000
+      - MAX_IMAGE_HEIGHT=6000
+      - OUTPUT_FORMAT=PNG
+      - ENABLE_GPU=False
+      - LOG_LEVEL=INFO
